@@ -25,7 +25,7 @@ def fetch_courses(courseSubject):
     courseSubject: A subject that is in all capitals
     
     """
-    
+
     url = f"https://catalogue.usask.ca/?subj_code={courseSubject}&cnum="
     response = requests.get(url)
     soup = BeautifulSoup(response.text, "html.parser")
@@ -33,6 +33,7 @@ def fetch_courses(courseSubject):
     courses = []
     course_elements = soup.find_all('div')
 
+    # Iterate through all div tags
     for course in course_elements:
 
         # Finding the title of the course
@@ -45,6 +46,21 @@ def fetch_courses(courseSubject):
         
         # Class number
         number = get_class_num(title)
+
+        # Class name, ex. CMPT145
+        name = courseSubject + number
+        print(name)
+
+        #Finding course description
+        divRow = course.find('div', class_='row')
+        if divRow:
+            divCol = divRow.find('div', class_='col-md-7')
+        if divCol:
+            description = divCol.find('p').text
+        
+
+
+
 
 
 
