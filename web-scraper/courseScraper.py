@@ -49,14 +49,14 @@ def fetch_courses(courseSubject):
 
         # Class name, ex. CMPT145
         name = courseSubject + number
-        print(name)
 
         #Finding course description
         divRow = course.find('div', class_='row')
         if divRow:
             divCol = divRow.find('div', class_='col-md-7')
-        if divCol:
-            description = divCol.find('p').text
+        if divCol is None:
+            continue
+        description = divCol.find('p').text
         
 
 
