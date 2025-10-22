@@ -9,7 +9,7 @@ python -m venv env
 than run:
 pip install -r requirements.txt
 
-to start the scraper:
+to start the scraper by running:
 python3 courseScraper.py 
 
     or
