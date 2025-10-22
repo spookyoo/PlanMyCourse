@@ -1,7 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
 
-
 def get_class_num(title):
     """
     Takes in a title, splits the array based on the white spaces
@@ -84,14 +83,21 @@ def fetch_courses(courseSubject):
                 pTag = colPrereq.find('p')
                 pTagList = list(pTag.stripped_strings)
             notes = list_to_text(pTagList)  
-            
-
-                    
         
-
+        courses.append({
+            'title': title,
+            'subject': courseSubject,
+            'number': number,
+            'class_name': courseSubject + number,
+            'description': notes,
+            'notes': notes
+        })
+    return courses
 
 def main():
-    fetch_courses('CMPT')
+    courses = fetch_courses('CMPT')
+    for i in courses:
+        print(i)
 
 if __name__=="__main__":
     main()
