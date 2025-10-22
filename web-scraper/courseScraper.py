@@ -1,6 +1,23 @@
 import requests
 from bs4 import BeautifulSoup
 
+import mysql.connector
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+db = mysql.connector.connect(
+    user=os.getenv('DB_USER'),
+    password=os.getenv('DB_PASS'),
+    database=os.getenv('DB_NAME'),
+    host=os.getenv('DB_HOST')
+)
+if db.is_connected():
+    print("Connected to database")
+else:
+    print("Did not connect")
+
 def get_class_num(title):
     """
     Takes in a title, splits the array based on the white spaces
@@ -96,8 +113,6 @@ def fetch_courses(courseSubject):
 
 def main():
     courses = fetch_courses('CMPT')
-    for i in courses:
-        print(i)
 
 if __name__=="__main__":
     main()
