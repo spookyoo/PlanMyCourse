@@ -15,6 +15,19 @@ def get_class_num(title):
     num = titleParts[1].split('.')[0] #No period, or extra numbers
     return num
 
+def list_to_text(arr):
+    """
+    Takes in an array and arranges it into one string,
+    with each element in a new line.
+
+    arr: An array filled with strings
+    """
+
+    notes = ""
+    for i in arr:
+        notes = notes + i + "\n"
+    
+    return notes
 
 
 def fetch_courses(courseSubject):
@@ -32,6 +45,12 @@ def fetch_courses(courseSubject):
 
     courses = []
     course_elements = soup.find_all('div')
+
+
+    # Initial values for elements that might not be in the url
+    description = ""
+    notes = ""
+    
 
     # Iterate through all div tags
     for course in course_elements:
@@ -54,19 +73,20 @@ def fetch_courses(courseSubject):
         divRow = course.find('div', class_='row')
         if divRow:
             divCol = divRow.find('div', class_='col-md-7')
-        if divCol is None:
-            continue
-        description = divCol.find('p').text
-        
+            if divCol is None:
+                continue
+            description = divCol.find('p').text
 
+        # Finding notes
+        if divRow:
+            colPrereq = divRow.find('div', class_='col-md-5')
+            if colPrereq:
+                pTag = colPrereq.find('p')
+                pTagList = list(pTag.stripped_strings)
+            notes = list_to_text(pTagList)  
+            
 
-
-
-
-
-
-
-
+                    
         
 
 
