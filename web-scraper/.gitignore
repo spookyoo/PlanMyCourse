@@ -7,3 +7,5 @@ __pycache__/
 # Virtual Environemnt
 env/
 storefront-bHnC4D5c/
+
+.env
