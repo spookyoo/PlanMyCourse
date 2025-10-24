@@ -7,6 +7,7 @@ import os
 
 load_dotenv()
 
+# MySql Config
 db = mysql.connector.connect(
     user=os.getenv('DB_USER'),
     password=os.getenv('DB_PASS'),
@@ -17,6 +18,21 @@ if db.is_connected():
     print("Connected to database")
 else:
     print("Did not connect")
+
+mycursor = db.cursor()
+
+# Create a courses table
+mycursor.execute("""
+CREATE TABLE IF NOT EXISTS courses (
+    courseId INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255),
+    subject VARCHAR(255),
+    number INT,
+    class_name VARCHAR(255),
+    description TEXT,
+    notes TEXT
+)
+""")              
 
 def get_class_num(title):
     """
@@ -104,7 +120,7 @@ def fetch_courses(courseSubject):
         courses.append({
             'title': title,
             'subject': courseSubject,
-            'number': number,
+            'number': int(number),
             'class_name': courseSubject + number,
             'description': notes,
             'notes': notes
