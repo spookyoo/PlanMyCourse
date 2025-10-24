@@ -23,7 +23,7 @@ mycursor = db.cursor()
 
 # Create a courses table
 mycursor.execute("""
-CREATE TABLE IF NOT EXISTS courses (
+CREATE TABLE IF NOT EXISTS Courses (
     courseId INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255),
     subject VARCHAR(255),
@@ -129,6 +129,20 @@ def fetch_courses(courseSubject):
 
 def main():
     courses = fetch_courses('CMPT')
+
+    for i in courses:
+        mycursor.execute("""
+        INSERT IGNORE INTO Courses (
+            title,
+            subject,
+            number,
+            class_name,
+            description,
+            notes)
+            VALUES (%s, %s, %s, %s, %s, %s)
+        """, (i['title'], i['subject'], i['number'], i['class_name'], i['description'], i['notes']))
+    db.commit()
+
 
 if __name__=="__main__":
     main()
