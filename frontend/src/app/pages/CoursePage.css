@@ -141,12 +141,12 @@ h3, h5 {
 .course-statistics h3,
 .course-new-review h3{
     margin: 0;
-    font-size: 28px;
+    font-size: 30px;
 }
 
 .course-rating p{
     margin: 0;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: bold;
 }
 

@@ -78,7 +78,11 @@ function CoursePage({user}) {
         <div className="course-review-section">
             <div className="course-statistics">
                 <div className="course-rating">
-                    <h3>Course not reviewed yet</h3>
+                    <h3>Course has no reviews</h3>
+                    {/* <div className="course-averageRating">
+                        <h3>4.2/5</h3>
+                        <p>Average Rating</p>
+                    </div> */}
                 </div>
                 <div className="course-distribution">
                     <RatingBar type="5" amount="0" total="0"/>
