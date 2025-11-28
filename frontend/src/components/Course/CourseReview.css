@@ -16,9 +16,7 @@
     font-size: 18px;
 }
 
-.course-review h4,
-.course-review p,
-.course-review span {
+.course-review p {
     margin: 0;
 }
 
@@ -28,8 +26,25 @@
     align-items: center;
     justify-content: space-between;
     font-weight: bold;
+    margin-bottom: 4px;
 }
 
 .review-userData {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
 
+.review-stars {
+    margin-left: 4px;
+}
+
+.review-star {
+    font-size: 24px;
+    color: #fff;
+    -webkit-text-stroke: 1px #215591;
+}
+
+.review-star.filled {
+  color:#215591
 }

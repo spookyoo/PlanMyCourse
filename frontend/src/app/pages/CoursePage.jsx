@@ -15,14 +15,16 @@ function CoursePage({user}) {
     const [rating, setRating] = useState(0);
     const [hover, setHover] = useState(0);
     const [error, setError] = useState("");
-
+    
     function handleSubmit(e) {
         e.preventDefault();
         if (rating === 0) {
-            
+            console.log("RATING ERROR");
+            return;
         }
+        setError("");
+        console.log("RATING:", rating);
     }
-
     function processNotes(rawNotes) {
         const cleanData = rawNotes.split("Prerequisite(s):")[1] || "";
 
@@ -77,7 +79,6 @@ function CoursePage({user}) {
             <div className="course-statistics">
                 <div className="course-rating">
                     <h3>Course not reviewed yet</h3>
-                    {/* <p>Average rating</p> */}
                 </div>
                 <div className="course-distribution">
                     <RatingBar type="5" amount="0" total="0"/>
@@ -88,7 +89,7 @@ function CoursePage({user}) {
                 </div>
             </div>
             <div className="divider"></div>
-            <form className="course-new-review">
+            <form className="course-new-review" onSubmit={handleSubmit}>
                 <h3>Create new review</h3>
                 <textarea required placeholder="Write your review..."></textarea>
                 <div className="course-new-buttons">
