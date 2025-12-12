@@ -14,7 +14,7 @@ function Recommendation( {searchTerm, onFocused, onSearch} ) {
     const maxRecentSearches = 5; // limit the recent searchs to prevent overflow
     const hasMounted = useRef(false); // used for dropdown visiblity control
 
-    localStorage.setItem("recentSearches","")
+
 
     // update the localstorage for recent searches to save locally
     useEffect(() => {
@@ -60,14 +60,14 @@ function Recommendation( {searchTerm, onFocused, onSearch} ) {
 
     // redirect the user to another page if any of the recommended courses is interacted with
     function redirect(searched) {
-        if (recommendResult.length > 0) {
+        if (recommendResult.length > 0)
+            {
             setRecentSearches(recentSearches => {
                 const filtered = recentSearches.filter(item => item != searched);
                 const updated = [searched, ...filtered];
                 return updated.slice(0,maxRecentSearches - 1);
             });
         }
-
         navigate(`./catalogue/${searched}`);
     }
 
