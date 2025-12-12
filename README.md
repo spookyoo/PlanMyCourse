@@ -3,7 +3,12 @@
 This is a full stack application designed for students at USASK,to help them plan and figure out which classes they still need to take and check each class prerequisites without having to navigate to another page. This app would also allow users to create reviews and comments on classes.
 
 ## How To Run This Project: 
-Before running this project you must have Docker Desktop installed
+
+### Prerequisites
+
+Make sure you have the following installed on your machine:  
+- [Docker](https://www.docker.com/get-started)  
+- [Docker Compose](https://docs.docker.com/compose/install/)  
 
 ### Steps to Run
 **Clone the repo**
