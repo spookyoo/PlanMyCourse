@@ -1,46 +1,77 @@
 
-# Plan My Course
-
-## Description
+# PlanMyCourse
 This is a full stack application designed for students at USASK,to help them plan and figure out which classes they still need to take and check each class prerequisites without having to navigate to another page. This app would also allow users to create reviews and comments on classes.
 
 ## How To Run This Project: 
-    ***Before starting, make sure you have node installed***
+Before running this project you must have Docker Desktop installed
 
-    Once you have node installed
-    clone the project to a local repo
-    
-    To make it so that the project runs on any OS, make sure you have that of docker desktop installed.
-    If you do have it, these are the steps:
-        * Note, if you are running this on a UNIX device (linux or mac) and you are getting permission errors,
-        add sudo before the command to every command that uses docker. 
-        example:
-            sudo docker-compose up -d
+### Steps to Run
+**Clone the repo**
+```
+git clone https://git.cs.usask.ca/kbv851/PlanMyCourse.git planmycourse
+```
+**Change terminal directory into root project file**
+```
+cd planmycourse
+```
+**Copy .env variables**
+```
+cp backend/.env.example backend/.env
+```
+**Initialize the data base**
+```
+docker-compose up -d db
+```
+**Initialize the scraper**
+```
+docker-compose up -d scraper
+```
+**Scrape Data** 
 
-        If on windows just follow the instructions normally    
+This might take a while since it is scraping a lot of USASK courses. Might take up to 3-5 minutes. You will know when it is done 
+when it says after the "Connected to database" that of the phrase: "courses and prerequisites have been added successfully" and 
+"courses.json already exists."
+```
+docker exec -it course_scraper python courseScraper.py
+```
+**Build Docker**
+```
+docker-compose up -d --build
+```
+**Build Docker Up**
+```
+docker-compose up -d
+```
+**Start the server**
+```
+docker logs -f main_server
+```
+**Start the frontend**
 
-        Make sure you are in the project directory itself in the terminal. Once you are, do the following: 
-            docker-compose up -d (It needs to be reworked right now since it gets the previous course catalogue table)
+Make sure you are on a different terminal (still the same directory as before) when you run this command:
+```
+docker logs -f main_frontend
+```
+**To stop docker**
+```
+docker-compose down
+```
 
-        --> This will start up that of server and if you want to go into the website, the link is: http://localhost:5173/
-        
-        --> If you want to stop the docker-compose.yml from running: 
-            docker-compose down
+## Troubleshooting
 
-            ---> The safest way to stop it.
+If you are experiencing any permission issues or are having issues with running the docker commands run `sudo` after every docker command.
 
-        --> If running that of the docker-compose.yml and this message occurs during the build: 
-            ✘ Container course_scraper service "scraper" didn't complete successfully: exit 1   
-            Just simply run back the docker-compose.yml: docker-compose up -d
+`Note:` This issue might occur if you are on a UNIX (Linux or Mac) device 
 
-                ---> The message happens because of doing: docker-compose down -v where it removes that of the volume being used in which 
-                    stores the web-scraper.
+**Example**
+```
+sudo docker-compose up -d db
+```
 
-## Roadmap
-Finish deliverable 2 part 2
+**For Mac Users**
 
-## Contributing
-Not accepting contributions from outside our group
+Instead of `docker-compose` use `docker compose`
+
 
 ## Authors and acknowledgment
 Antoinette Rubia
@@ -55,6 +86,3 @@ Randolf Pugong
 
 ## License
 MIT License
-
-## Project status
-This project is in its coding stages, testing will be done when majority of the features are implemented.
